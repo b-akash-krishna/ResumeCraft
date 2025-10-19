@@ -9,15 +9,15 @@ export default function Footer() {
             © 2024 ResumeAI. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <Link href="/privacy" data-testid="link-privacy">
-              <a className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/privacy">
+              <span className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-privacy">
                 Privacy Policy
-              </a>
+              </span>
             </Link>
-            <Link href="/support" data-testid="link-support">
-              <a className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/support">
+              <span className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer" data-testid="link-support">
                 Support
-              </a>
+              </span>
             </Link>
           </div>
         </div>
