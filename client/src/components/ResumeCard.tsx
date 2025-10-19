@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FileText, Download, Edit, Trash2 } from "lucide-react";
+import { Link } from "wouter"; // <--- ADDED IMPORT
 
 interface ResumeCardProps {
   id: string;
@@ -19,6 +20,7 @@ export default function ResumeCard({ id, title, lastEdited, atsScore }: ResumeCa
 
   return (
     <Card className="hover-elevate active-elevate-2 overflow-hidden" data-testid={`card-resume-${id}`}>
+      {/* ... Preview UI remains the same ... */}
       <div className="aspect-[8.5/11] bg-gradient-to-br from-card to-muted border-b relative">
         <div className="absolute top-3 right-3">
           <Badge className={getScoreColor(atsScore)} data-testid={`badge-ats-${id}`}>
@@ -47,10 +49,14 @@ export default function ResumeCard({ id, title, lastEdited, atsScore }: ResumeCa
         </div>
         
         <div className="flex gap-2">
-          <Button size="sm" variant="outline" className="flex-1 gap-2" data-testid={`button-edit-${id}`}>
-            <Edit className="w-3 h-3" />
-            Edit
-          </Button>
+          {/* WRAP EDIT BUTTON IN LINK WITH ID */}
+          <Link href={`/resume-builder/${id}`} className="flex-1">
+            <Button size="sm" variant="outline" className="w-full gap-2" data-testid={`button-edit-${id}`}>
+              <Edit className="w-3 h-3" />
+              Edit
+            </Button>
+          </Link>
+
           <Button size="sm" variant="outline" className="gap-2" data-testid={`button-download-${id}`}>
             <Download className="w-3 h-3" />
           </Button>

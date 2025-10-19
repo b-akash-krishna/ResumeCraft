@@ -12,9 +12,20 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
+  // 1. Retrieve the token from storage (e.g., localStorage)
+  const token = localStorage.getItem("auth_token");
+  
+  const headers: HeadersInit = data ? { "Content-Type": "application/json" } : {};
+  
+  // 2. Add the Authorization header if a token exists
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
   const res = await fetch(url, {
     method,
-    headers: data ? { "Content-Type": "application/json" } : {},
+    // 3. Use the updated headers
+    headers: headers,
     body: data ? JSON.stringify(data) : undefined,
     credentials: "include",
   });
@@ -29,8 +40,19 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
+    // 1. Retrieve the token for query functions as well
+    const token = localStorage.getItem("auth_token");
+    const headers: HeadersInit = {};
+
+    // 2. Add the Authorization header if a token exists
+    if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+    }
+
     const res = await fetch(queryKey.join("/") as string, {
       credentials: "include",
+      // 3. Use the updated headers for fetch requests inside react-query
+      headers: headers,
     });
 
     if (unauthorizedBehavior === "returnNull" && res.status === 401) {
