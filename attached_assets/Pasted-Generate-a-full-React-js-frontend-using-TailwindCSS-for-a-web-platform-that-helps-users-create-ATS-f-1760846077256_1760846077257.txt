@@ -1,0 +1,100 @@
+Generate a full React.js frontend using TailwindCSS for a web platform that helps users create ATS-friendly resumes and practice mock interviews with an AI assistant.
+Use a modular component-based architecture and modern design principles focused on clarity, interactivity, and performance.
+
+The system must include two main modules:
+
+Resume Builder and Optimizer
+
+AI Mock Interview Simulator
+
+Detailed Requirements:
+1. General Setup:
+
+Use React.js with functional components, React Router for navigation, and context API or Redux Toolkit for state management.
+
+Configure TailwindCSS for styling and responsive design.
+
+Create a structured folder layout:
+src/components, src/pages, src/utils, src/assets, src/context.
+
+Implement a minimalist and professional theme using white backgrounds, blue highlights, and gray text.
+
+2. Pages and Navigation:
+
+Home Page: Overview of platform, with two primary CTAs — “Optimize Resume” and “Start Mock Interview”.
+
+Navbar: Sticky top bar with logo, links for Home, Resume Builder, Mock Interview, Dashboard, and Logout.
+
+Footer: Simple credit/footer component with links to privacy policy and support.
+
+3. Resume Builder Components:
+
+UploadResume.jsx: Enable file upload for .pdf, .docx, or .txt. Show progress bar and parsed data summary.
+
+ResumeEditor.jsx:
+
+Split-screen layout: left side editable text sections (Experience, Projects, Skills); right side live preview pane.
+
+Include floating “AI Assist” button for contextual suggestions.
+
+Include “ATS Score Meter” card (dynamic bar that updates as user edits).
+
+Provide “Download as PDF” and “Export as .tex” buttons.
+
+TemplatePicker.jsx: Scrollable modal component to preview and choose LaTeX-style templates.
+
+ResumePreview.jsx: PDF-like preview using React-PDF or iframe rendering for .tex output.
+
+4. Mock Interview Components:
+
+InterviewSetup.jsx:
+
+Form with dropdown to choose job role, question type (Technical/HR/Mixed).
+
+Resume file selector (use uploaded or generated one).
+
+InterviewSession.jsx:
+
+Full-screen interactive interface.
+
+Displays AI interviewer avatar (placeholder image/video).
+
+Shows dynamic question box and user camera preview using WebRTC placeholder component.
+
+“Next Question”, “Pause”, and “End Session” buttons.
+
+InterviewReport.jsx:
+
+Dashboard view showing performance results, including Confidence Score, Grammar, and Relevance.
+
+Include charts or progress bars for metrics.
+
+Provide replay section with embedded recorded video (stub for now).
+
+5. Dashboard Components:
+
+UserDashboard.jsx: Cards for past resumes, ATS scores, and interview history.
+
+Implement dummy JSON placeholders to simulate API data.
+
+6. Utility Features:
+
+Toast alerts for success/failure (upload complete, resume saved).
+
+Global Loader and EmptyState components.
+
+Error boundaries for missing components.
+
+7. Integration Ready:
+
+All form inputs, editor sections, and interview simulators should use dummy functions (handleSubmit, handleGenerate, etc.) where backend integration will connect later.
+
+8. Best Practices:
+
+Follow clean code patterns and ensure modular reusability.
+
+Highlight all major sections using semantic HTML (section, header, main).
+
+Optimize layout for mobile responsiveness and accessibility (ARIA tags).
+
+Finally, include brief setup instructions (npm install, npm start) in comments.
