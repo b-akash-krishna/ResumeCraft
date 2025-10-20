@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { FileText, Target, LayoutDashboard, Menu, X } from "lucide-react";
+import { FileText, Target, LayoutDashboard, Menu, X, Settings } from "lucide-react"; // <--- ADDED Settings ICON
 import { useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -14,9 +14,17 @@ export default function Navbar() {
     { path: "/mock-interview", label: "Mock Interview", icon: Target },
     { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   ];
+  
+  // New Utility/Settings Links
+  const utilityItems = [
+      { path: "/settings", label: "Settings", icon: Settings } // <--- ADDED SETTINGS LINK
+  ];
+
+  const allItems = [...navItems, ...utilityItems];
 
   const isActive = (path: string) => {
     if (path === "/") return location === "/";
+    // Checks if current path starts with the nav item path
     return location.startsWith(path);
   };
 
@@ -34,6 +42,7 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden md:flex items-center gap-2">
+            {/* Main Navigation Links */}
             {navItems.map((item) => (
               <Link key={item.path} href={item.path} data-testid={`link-${item.label.toLowerCase().replace(" ", "-")}`}>
                 <Button
@@ -49,6 +58,24 @@ export default function Navbar() {
                 </Button>
               </Link>
             ))}
+            
+            {/* Utility/Settings Button (Desktop Icon) */}
+            {utilityItems.map((item) => (
+              <Link key={item.path} href={item.path} data-testid={`link-${item.label.toLowerCase()}`}>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className={`gap-2 ${
+                    isActive(item.path)
+                      ? "text-primary font-semibold"
+                      : "text-muted-foreground"
+                  }`}
+                >
+                  {item.icon && <item.icon className="w-5 h-5" />}
+                </Button>
+              </Link>
+            ))}
+
           </div>
 
           <div className="flex items-center gap-2">
@@ -67,7 +94,7 @@ export default function Navbar() {
 
         {mobileMenuOpen && (
           <div className="md:hidden py-4 space-y-2 border-t">
-            {navItems.map((item) => (
+            {allItems.map((item) => (
               <Link key={item.path} href={item.path} data-testid={`link-mobile-${item.label.toLowerCase().replace(" ", "-")}`}>
                 <Button
                   variant="ghost"

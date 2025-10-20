@@ -10,6 +10,7 @@ import InterviewReport from "@/pages/InterviewReport";
 import Dashboard from "@/pages/Dashboard";
 import Login from "@/pages/Login"; 
 import Register from "@/pages/Register"; 
+import Settings from "@/pages/Settings"; // <--- ADDED IMPORT
 import NotFound from "@/pages/not-found";
 
 // Component that wraps protected routes
@@ -30,28 +31,14 @@ function ProtectedRoute({ path, component: Component }: { path: string; componen
 }
 
 function Router() {
-  // Define protected paths
-  const protectedPaths = [
-    // Added parameterized route for loading a specific resume
-    "/resume-builder/:resumeId", 
-    "/resume-builder", 
-    "/mock-interview", 
-    "/interview-report", 
-    "/dashboard"
-  ];
   
-  // Define public paths that shouldn't redirect
-  const publicPaths = ["/", "/login", "/register"];
-
-  // The ProtectedRoute logic handles which component to render based on path match.
-  // We need to update the component mapping to handle the ResumeBuilder routes.
-
   return (
     <Switch>
       {/* Public Routes */}
       <Route path="/" component={Login} />
       <Route path="/login" component={Login} /> 
       <Route path="/register" component={Register} /> 
+      <Route path="/settings" component={Settings} /> {/* <--- ADDED ROUTE */}
       
       {/* Protected Routes - Use ProtectedRoute wrapper */}
       <ProtectedRoute path="/dashboard" component={Dashboard} />
